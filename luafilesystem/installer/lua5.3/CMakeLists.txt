@@ -4,8 +4,8 @@ PROJECT("com.github.keplerproject-luafilesystem")
 
 INCLUDE(../../../cmake/version.cmake)
 
-SET(INSTALL_WIN32 ${CMAKE_CURRENT_SOURCE_DIR}/../../../build/windows32/lua5.1/luafilesystem/install)
-SET(INSTALL_WIN64 ${CMAKE_CURRENT_SOURCE_DIR}/../../../build/windows64/lua5.1/luafilesystem/install)
+SET(INSTALL_WIN32 ${CMAKE_CURRENT_SOURCE_DIR}/../../../build/windows32/lua5.3/luafilesystem/install)
+SET(INSTALL_WIN64 ${CMAKE_CURRENT_SOURCE_DIR}/../../../build/windows64/lua5.3/luafilesystem/install)
 
 # Get the project version. Both the WIN32 and the WIN64 folder have the same version file.
 INCLUDE(${INSTALL_WIN32}/com.github.keplerproject-luafilesystem.version)
@@ -13,7 +13,7 @@ SET(PROJECT_VERSION ${com.github.keplerproject-luafilesystem_VERSION})
 
 SET(CPACK_OUTPUT_FILE_PREFIX targets/jonchki/repository/com/github/keplerproject/luafilesystem/${PROJECT_VERSION})
 SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
-SET(CPACK_PACKAGE_FILE_NAME "lua5.1-luafilesystem-${PROJECT_VERSION}")
+SET(CPACK_PACKAGE_FILE_NAME "lua5.3-luafilesystem-${PROJECT_VERSION}")
 
 SET(CPACK_GENERATOR "ZIP")
 INCLUDE(CPack)
@@ -44,5 +44,5 @@ INSTALL(FILES install.lua
 
 
 CONFIGURE_FILE(bitop.xml
-               ${CPACK_OUTPUT_FILE_PREFIX}/lua5.1-luafilesystem-${PROJECT_VERSION}.xml
+               ${CPACK_OUTPUT_FILE_PREFIX}/lua5.3-luafilesystem-${PROJECT_VERSION}.xml
                @ONLY)

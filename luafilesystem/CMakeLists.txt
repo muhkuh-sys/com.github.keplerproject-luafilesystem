@@ -12,9 +12,23 @@ SET(PROJECT_VERSION  "${VERSION_EXTERNAL}.${VERSION_PACKAGE}")
 INCLUDE(${CMAKE_HOME_DIRECTORY}/cmake/version.cmake)
 
 # Filter the jonchki configuration.
-CONFIGURE_FILE(installer/lua5.1/luafilesystem.xml
-               ${CMAKE_CURRENT_BINARY_DIR}/lua5.1-luafilesystem-${PROJECT_VERSION}.xml
-               @ONLY)
+IF(${BUILDCFG_LUA_VERSION} STREQUAL "5.1")
+	CONFIGURE_FILE(installer/lua5.1/luafilesystem.xml
+	               ${CMAKE_CURRENT_BINARY_DIR}/lua5.1-luafilesystem-${PROJECT_VERSION}.xml
+	               @ONLY)
+ELSEIF(${BUILDCFG_LUA_VERSION} STREQUAL "5.2")
+	CONFIGURE_FILE(installer/lua5.2/luafilesystem.xml
+	               ${CMAKE_CURRENT_BINARY_DIR}/lua5.2-luafilesystem-${PROJECT_VERSION}.xml
+	               @ONLY)
+ELSEIF(${BUILDCFG_LUA_VERSION} STREQUAL "5.3")
+	CONFIGURE_FILE(installer/lua5.3/luafilesystem.xml
+	               ${CMAKE_CURRENT_BINARY_DIR}/lua5.3-luafilesystem-${PROJECT_VERSION}.xml
+	               @ONLY)
+ELSE(${BUILDCFG_LUA_VERSION} STREQUAL "5.1")
+	# Stop here!
+	MESSAGE(FATAL_ERROR "The value '${BUILDCFG_LUA_VERSION}' for BUILDCFG_LUA_VERSION is invalid!")
+ENDIF(${BUILDCFG_LUA_VERSION} STREQUAL "5.1")
+
 
 #----------------------------------------------------------------------------
 #
