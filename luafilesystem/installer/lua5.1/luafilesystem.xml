@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jonchki-artifact version="1.0">
+	<info group="com.github.keplerproject"
+	      module="luafilesystem"
+	      artifact="lua5.1-luafilesystem"
+	      version="@PROJECT_VERSION@"
+	      vcs-id="@PROJECT_VERSION_VCS@">
+		<license name="x"/>
+		<author name="y" url="z" />
+		<description>
+			lalala
+		</description>
+	</info>
+	<build-dependencies>
+		<dependency group="org.lua" module="lua" artifact="lua5.1" version="5.1.5.1"/>
+	</build-dependencies>
+	<dependencies>
+		<dependency group="org.lua" module="lua" artifact="lua5.1"/>
+	</dependencies>
+</jonchki-artifact>
