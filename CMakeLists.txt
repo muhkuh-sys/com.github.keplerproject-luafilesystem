@@ -18,7 +18,7 @@ OPTION(BUILDCFG_ONLY_JONCHKI_CFG "Build only the jonchki configuration. This is 
 #
 
 # Python is used for some test scripts.
-FIND_PACKAGE(PythonInterp REQUIRED)
+FIND_PACKAGE(PythonInterp 2.7 REQUIRED)
 
 
 #----------------------------------------------------------------------------

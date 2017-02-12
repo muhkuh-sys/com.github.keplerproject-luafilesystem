@@ -3,7 +3,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT("luafilesystem")
 
 ENABLE_TESTING()
-FIND_PACKAGE(PythonInterp REQUIRED)
+FIND_PACKAGE(PythonInterp 2.7 REQUIRED)
 
 # Build the Lua module.
 ADD_LIBRARY(TARGET_luafilesystem MODULE
