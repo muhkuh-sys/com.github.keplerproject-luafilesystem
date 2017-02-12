@@ -25,18 +25,18 @@ lxc exec ${CONTAINER} -- bash -c 'apt-get install --assume-yes lua5.1 lua-filesy
 
 # Build the 32bit version.
 lxc exec ${CONTAINER} -- bash -c 'export PATH=/usr/mingw-w64-i686/bin:${PATH} && cd /tmp/work && bash .build01_windows32.sh'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_lua5.1.tar.gz --gzip --directory /tmp/work/build/windows32/lua5.1/luafilesystem/luafilesystem-1.6.3/lib .'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_lua5.2.tar.gz --gzip --directory /tmp/work/build/windows32/lua5.2/luafilesystem/luafilesystem-1.6.3/lib .'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_lua5.3.tar.gz --gzip --directory /tmp/work/build/windows32/lua5.3/luafilesystem/luafilesystem-1.6.3/lib .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_lua5.1.tar.gz --gzip --directory /tmp/work/build/windows32/lua5.1/luafilesystem/install .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_lua5.2.tar.gz --gzip --directory /tmp/work/build/windows32/lua5.2/luafilesystem/install .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_lua5.3.tar.gz --gzip --directory /tmp/work/build/windows32/lua5.3/luafilesystem/install .'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_windows_x86_lua5.1.tar.gz'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_windows_x86_lua5.2.tar.gz'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_windows_x86_lua5.3.tar.gz'
 
 # Build the 64bit version.
 lxc exec ${CONTAINER} -- bash -c 'export PATH=/usr/mingw-w64-x86_64/bin:${PATH} && cd /tmp/work && bash .build02_windows64.sh'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_64_lua5.1.tar.gz --gzip --directory /tmp/work/build/windows64/lua5.1/luafilesystem/luafilesystem-1.6.3/lib .'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_64_lua5.2.tar.gz --gzip --directory /tmp/work/build/windows64/lua5.2/luafilesystem/luafilesystem-1.6.3/lib .'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_64_lua5.3.tar.gz --gzip --directory /tmp/work/build/windows64/lua5.3/luafilesystem/luafilesystem-1.6.3/lib .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_64_lua5.1.tar.gz --gzip --directory /tmp/work/build/windows64/lua5.1/luafilesystem/install .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_64_lua5.2.tar.gz --gzip --directory /tmp/work/build/windows64/lua5.2/luafilesystem/install .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_windows_x86_64_lua5.3.tar.gz --gzip --directory /tmp/work/build/windows64/lua5.3/luafilesystem/install .'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_windows_x86_64_lua5.1.tar.gz'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_windows_x86_64_lua5.2.tar.gz'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_windows_x86_64_lua5.3.tar.gz'

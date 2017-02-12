@@ -25,9 +25,9 @@ lxc exec ${CONTAINER} -- bash -c 'apt-get install --assume-yes lua5.1 lua-filesy
 
 # Build the 64bit version.
 lxc exec ${CONTAINER} -- bash -c 'cd /tmp/work && bash .build03_linux.sh'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_ubuntu_1610_x86_64_lua5.1.tar.gz --gzip --directory /tmp/work/build/linux/lua5.1/luafilesystem/luafilesystem-1.6.3/lib .'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_ubuntu_1610_x86_64_lua5.2.tar.gz --gzip --directory /tmp/work/build/linux/lua5.2/luafilesystem/luafilesystem-1.6.3/lib .'
-lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_ubuntu_1610_x86_64_lua5.3.tar.gz --gzip --directory /tmp/work/build/linux/lua5.3/luafilesystem/luafilesystem-1.6.3/lib .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_ubuntu_1610_x86_64_lua5.1.tar.gz --gzip --directory /tmp/work/build/linux/lua5.1/luafilesystem/install .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_ubuntu_1610_x86_64_lua5.2.tar.gz --gzip --directory /tmp/work/build/linux/lua5.2/luafilesystem/install .'
+lxc exec ${CONTAINER} -- bash -c 'tar --create --file /tmp/work/build/build_ubuntu_1610_x86_64_lua5.3.tar.gz --gzip --directory /tmp/work/build/linux/lua5.3/luafilesystem/install .'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_ubuntu_1610_x86_64_lua5.1.tar.gz'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_ubuntu_1610_x86_64_lua5.2.tar.gz'
 lxc exec ${CONTAINER} -- bash -c 'chown `stat -c %u:%g /tmp/work` /tmp/work/build/build_ubuntu_1610_x86_64_lua5.3.tar.gz'
