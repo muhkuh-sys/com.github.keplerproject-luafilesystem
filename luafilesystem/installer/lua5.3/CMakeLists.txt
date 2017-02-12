@@ -4,8 +4,16 @@ PROJECT("com.github.keplerproject-luafilesystem")
 
 INCLUDE(../../../cmake/version.cmake)
 
-SET(INSTALL_WIN32 ${CMAKE_CURRENT_SOURCE_DIR}/../../../build/windows32/lua5.3/luafilesystem/install)
-SET(INSTALL_WIN64 ${CMAKE_CURRENT_SOURCE_DIR}/../../../build/windows64/lua5.3/luafilesystem/install)
+SET(INSTALL_WIN32              "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/windows_x86")
+SET(INSTALL_WIN64              "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/windows_x86_64")
+SET(INSTALL_UBUNTU_1204_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1204_x86")
+SET(INSTALL_UBUNTU_1204_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1204_x86_64")
+SET(INSTALL_UBUNTU_1404_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1404_x86")
+SET(INSTALL_UBUNTU_1404_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1404_x86_64")
+SET(INSTALL_UBUNTU_1604_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1604_x86")
+SET(INSTALL_UBUNTU_1604_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1604_x86_64")
+SET(INSTALL_UBUNTU_1610_X86    "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1610_x86")
+SET(INSTALL_UBUNTU_1610_X86_64 "${CMAKE_CURRENT_SOURCE_DIR}/../../../build/lua5.3/ubuntu_1610_x86_64")
 
 # Get the project version. Both the WIN32 and the WIN64 folder have the same version file.
 INCLUDE(${INSTALL_WIN32}/com.github.keplerproject-luafilesystem.version)
@@ -23,18 +31,40 @@ INCLUDE(CPack)
 #
 # Install the 32bit files.
 #
-INSTALL(FILES ${INSTALL_WIN32}/lua_plugins/lfs.dll
-        DESTINATION windows_x86/lua_plugins
-)
+INSTALL(FILES ${INSTALL_WIN32}/lib/lfs.dll
+        DESTINATION windows_x86/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1204_X86}/lib/lfs.so
+        DESTINATION ubuntu_1204_x86/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1404_X86}/lib/lfs.so
+        DESTINATION ubuntu_1404_x86/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1604_X86}/lib/lfs.so
+        DESTINATION ubuntu_1604_x86/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1610_X86}/lib/lfs.so
+        DESTINATION ubuntu_1610_x86/lua_plugins)
 
 
 #-----------------------------------------------------------------------------
 #
 # Install the 64bit files.
 #
-INSTALL(FILES ${INSTALL_WIN64}/lua_plugins/lfs.dll
-        DESTINATION windows_x64/lua_plugins
-)
+INSTALL(FILES ${INSTALL_WIN64}/lib/lfs.dll
+        DESTINATION windows_x64/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1204_X86_64}/lib/lfs.so
+        DESTINATION ubuntu_1204_x86_64/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1404_X86_64}/lib/lfs.so
+        DESTINATION ubuntu_1404_x86_64/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1604_X86_64}/lib/lfs.so
+        DESTINATION ubuntu_1604_x86_64/lua_plugins)
+
+INSTALL(FILES ${INSTALL_UBUNTU_1610_X86_64}/lib/lfs.so
+        DESTINATION ubuntu_1610_x86_64/lua_plugins)
 
 
 #-----------------------------------------------------------------------------
@@ -43,6 +73,6 @@ INSTALL(FILES install.lua
         DESTINATION .)
 
 
-CONFIGURE_FILE(bitop.xml
+CONFIGURE_FILE(luafilesystem.xml
                ${CPACK_OUTPUT_FILE_PREFIX}/lua5.3-luafilesystem-${PROJECT_VERSION}.xml
                @ONLY)
