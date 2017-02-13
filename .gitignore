@@ -1,14 +1,5 @@
 # Ignore all files in the targets folder.
 /build/
-/build_windows32/
-/build_windows64/
-
-# Ignore the Ivy libraries.
-/ivy/lib/
-
-# Ignore the Ivy path list.
-/ivy/ant_paths.cmake
-/ivy/path.properties
 
 # Ignore all compiled python modules.
 *.pyc
