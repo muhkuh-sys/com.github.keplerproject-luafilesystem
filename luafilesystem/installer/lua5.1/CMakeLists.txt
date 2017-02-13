@@ -76,3 +76,13 @@ INSTALL(FILES install.lua
 CONFIGURE_FILE(luafilesystem.xml
                ${CPACK_OUTPUT_FILE_PREFIX}/lua5.1-luafilesystem-${PROJECT_VERSION}.xml
                @ONLY)
+
+#-----------------------------------------------------------------------------
+#
+# Filter the pom.xml file.
+#
+SET(POM_ARTIFACT_ID  "lua5.1-luafilesystem")
+SET(POM_GROUP_ID     "com.github.keplerproject")
+SET(POM_VERSION      "${PROJECT_VERSION}")
+SET(POM_PACKAGING    "zip")
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/pom.xml ${CPACK_OUTPUT_FILE_PREFIX}/pom.xml)
