@@ -16,22 +16,22 @@ elseif strDistId=='ubuntu' then
       t:install('ubuntu_1204_x86_64/lua_plugins/lfs.so',    '${install_lua_cpath}/')
     end
 
-  if strDistVersion=='14.04' then
+  elseif strDistVersion=='14.04' then
     if strCpuArch=='x86' then
       t:install('ubuntu_1404_x86/lua_plugins/lfs.so',       '${install_lua_cpath}/')
     elseif strCpuArch=='x86_64' then
       t:install('ubuntu_1404_x86_64/lua_plugins/lfs.so',    '${install_lua_cpath}/')
     end
 
-    if strDistVersion=='16.04' then
-      if strCpuArch=='x86' then
+  elseif strDistVersion=='16.04' then
+    if strCpuArch=='x86' then
       t:install('ubuntu_1604_x86/lua_plugins/lfs.so',       '${install_lua_cpath}/')
     elseif strCpuArch=='x86_64' then
       t:install('ubuntu_1604_x86_64/lua_plugins/lfs.so',    '${install_lua_cpath}/')
     end
 
-    if strDistVersion=='16.10' then
-      if strCpuArch=='x86' then
+  elseif strDistVersion=='16.10' then
+    if strCpuArch=='x86' then
       t:install('ubuntu_1610_x86/lua_plugins/lfs.so',       '${install_lua_cpath}/')
     elseif strCpuArch=='x86_64' then
       t:install('ubuntu_1610_x86_64/lua_plugins/lfs.so',    '${install_lua_cpath}/')
