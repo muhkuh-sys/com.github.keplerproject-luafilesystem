@@ -5,10 +5,11 @@
 	      artifact="lua5.2-luafilesystem"
 	      version="@PROJECT_VERSION@"
 	      vcs-id="@PROJECT_VERSION_VCS@">
-		<license name="x"/>
-		<author name="y" url="z" />
+		<license name="MIT"/>
+		<author name="Kepler Project" url="https://github.com/keplerproject/luafilesystem" />
 		<description>
-			lalala
+			LuaFileSystem is a Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution.
+			LuaFileSystem offers a portable way to access the underlying directory structure and file attributes.
 		</description>
 	</info>
 	<build-dependencies>
