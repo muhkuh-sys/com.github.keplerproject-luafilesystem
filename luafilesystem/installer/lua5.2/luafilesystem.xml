@@ -4,7 +4,8 @@
 	      module="luafilesystem"
 	      artifact="lua5.2-luafilesystem"
 	      version="@PROJECT_VERSION@"
-	      vcs-id="@PROJECT_VERSION_VCS@">
+	      vcs-id="@PROJECT_VERSION_VCS@"
+	      extension="tar.xz">
 		<license name="MIT"/>
 		<author name="Kepler Project" url="https://github.com/keplerproject/luafilesystem" />
 		<description>

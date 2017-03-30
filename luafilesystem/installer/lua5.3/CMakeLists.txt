@@ -23,7 +23,7 @@ SET(CPACK_OUTPUT_FILE_PREFIX targets/jonchki/repository/com/github/keplerproject
 SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
 SET(CPACK_PACKAGE_FILE_NAME "lua5.3-luafilesystem-${PROJECT_VERSION}")
 
-SET(CPACK_GENERATOR "ZIP")
+SET(CPACK_GENERATOR "TXZ")
 INCLUDE(CPack)
 
 
@@ -84,5 +84,5 @@ CONFIGURE_FILE(luafilesystem.xml
 SET(POM_ARTIFACT_ID  "lua5.3-luafilesystem")
 SET(POM_GROUP_ID     "com.github.keplerproject")
 SET(POM_VERSION      "${PROJECT_VERSION}")
-SET(POM_PACKAGING    "zip")
+SET(POM_PACKAGING    "tar.xz")
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/pom.xml ${CPACK_OUTPUT_FILE_PREFIX}/pom.xml)
