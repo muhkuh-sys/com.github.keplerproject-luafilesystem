@@ -96,16 +96,22 @@ pushd build/com.github.keplerproject-lua5.1-luafilesystem
 cmake -DCMAKE_INSTALL_PREFIX="" ../../luafilesystem/installer/lua5.1
 make
 make package
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/com/github/keplerproject/luafilesystem/*/lua5.1-luafilesystem-*.xml
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/com/github/keplerproject/luafilesystem/*/lua5.1-luafilesystem-*.tar.xz
 popd
 
 pushd build/com.github.keplerproject-lua5.2-luafilesystem
 cmake -DCMAKE_INSTALL_PREFIX="" ../../luafilesystem/installer/lua5.2
 make
 make package
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/com/github/keplerproject/luafilesystem/*/lua5.2-luafilesystem-*.xml
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/com/github/keplerproject/luafilesystem/*/lua5.2-luafilesystem-*.tar.xz
 popd
 
 pushd build/com.github.keplerproject-lua5.3-luafilesystem
 cmake -DCMAKE_INSTALL_PREFIX="" ../../luafilesystem/installer/lua5.3
 make
 make package
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/com/github/keplerproject/luafilesystem/*/lua5.3-luafilesystem-*.xml
+python2.7 ../../cmake/tools/generate_hash.py targets/jonchki/repository/com/github/keplerproject/luafilesystem/*/lua5.3-luafilesystem-*.tar.xz
 popd
