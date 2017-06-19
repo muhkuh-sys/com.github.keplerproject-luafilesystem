@@ -13,10 +13,8 @@
 			LuaFileSystem offers a portable way to access the underlying directory structure and file attributes.
 		</description>
 	</info>
-	<build-dependencies>
-		<dependency group="org.lua" module="lua" artifact="lua5.1" version="5.1.5.1"/>
-	</build-dependencies>
 	<dependencies>
-		<dependency group="org.lua" module="lua" artifact="lua5.1"/>
+		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.1"/>
+		<dependency group="org.lua" module="lua" artifact="lua"/>
 	</dependencies>
 </jonchki-artifact>
