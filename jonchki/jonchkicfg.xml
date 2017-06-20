@@ -1,26 +1,17 @@
 <jonchkicfg>
 	<repositories>
-<!--
-		<repository id="sourceforge" type="url" cacheable="false">
+		<repository id="bintray" type="url" cacheable="true">
+			<root>https://dl.bintray.com/muhkuh/jonchki</root>
+			<versions>[group]/[module]</versions>
+			<config>[group]/[module]/[version]/[artifact]-[version].[extension]</config>
+			<artifact>[group]/[module]/[version]/[artifact]-[version].[extension]</artifact>
+		</repository>
+
+		<repository id="sourceforge" type="url" cacheable="true">
 			<root>https://sourceforge.net/projects/muhkuh/files/jonchki</root>
-			<versions>[group]/[module]</versions>
-			<config>[group]/[module]/[version]/[artifact]-[version].xml</config>
-			<artifact>[group]/[module]/[version]/[artifact]-[version].zip</artifact>
-		</repository>
--->
-<!--
-		<repository id="local_httpd" type="url" cacheable="false">
-			<root>http://192.168.2.142/jonchki</root>
-			<versions>[group]/[module]</versions>
-			<config>[group]/[module]/[version]/[artifact]-[version].xml</config>
-			<artifact>[group]/[module]/[version]/[artifact]-[version].zip</artifact>
-		</repository>
--->
-		<repository id="local_httpd" type="url" cacheable="false">
-			<root>http://127.0.0.1/jonchki</root>
-			<versions>[group]/[module]</versions>
-			<config>[group]/[module]/[version]/[artifact]-[version].xml</config>
-			<artifact>[group]/[module]/[version]/[artifact]-[version].zip</artifact>
+			<versions>[group]/[module]/</versions>
+			<config>[group]/[module]/[version]/[artifact]-[version].[extension]/download</config>
+			<artifact>[group]/[module]/[version]/[artifact]-[version].[extension]/download</artifact>
 		</repository>
 	</repositories>
 </jonchkicfg>
