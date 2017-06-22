@@ -58,6 +58,14 @@ lxc file push build/build_windows_x86_64_lua5.3.tar.gz ${CONTAINER}/tmp/work/bui
 # Build the artefacts.
 lxc exec ${CONTAINER} -- bash -c 'cd /tmp/work && bash .build04_artefacts.sh'
 
+# Get all artifacts.
+FILELIST=`lxc exec ${CONTAINER} -- bash -c 'find "/tmp/work" -path "/tmp/work/build/com.github.keplerproject-lua*-luafilesystem/targets/jonchki/repository/com/github/keplerproject/luafilesystem/*" -type f'`
+echo ${FILELIST}
+for strAbsolutePath in ${FILELIST}; do
+	echo "Pull ${strAbsolutePath}"
+	lxc file pull ${CONTAINER}${strAbsolutePath} build/
+done
+
 # Stop and remove the container.
 lxc stop ${CONTAINER}
 lxc delete ${CONTAINER}
