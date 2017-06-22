@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean before build') {
+            steps {
+                sh 'rm -rf .[^.] .??* *'
+            }
+        }
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/muhkuh-sys/com.github.keplerproject-luafilesystem.git']]])
@@ -130,6 +135,11 @@ pipeline {
         stage('Save Artifacts') {
             steps {
                 archive 'build/com.github.keplerproject-lua*-luafilesystem/targets/jonchki/**/*.xml,build/com.github.keplerproject-lua*-luafilesystem/targets/jonchki/**/*.tar.xz,build/com.github.keplerproject-lua*-luafilesystem/targets/jonchki/**/*.hash,build/com.github.keplerproject-lua*-luafilesystem/targets/jonchki/**/*.pom'
+            }
+        }
+        stage('Clean after build') {
+            steps {
+                sh 'rm -rf .[^.] .??* *'
             }
         }
     }
