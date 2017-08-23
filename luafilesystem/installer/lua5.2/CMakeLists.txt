@@ -52,7 +52,7 @@ INSTALL(FILES ${INSTALL_UBUNTU_1704_X86}/lib/lfs.so
 # Install the 64bit files.
 #
 INSTALL(FILES ${INSTALL_WIN64}/lib/lfs.dll
-        DESTINATION windows_x64/lua_plugins)
+        DESTINATION windows_x86_64/lua_plugins)
 
 INSTALL(FILES ${INSTALL_UBUNTU_1404_X86_64}/lib/lfs.so
         DESTINATION ubuntu_1404_x86_64/lua_plugins)
