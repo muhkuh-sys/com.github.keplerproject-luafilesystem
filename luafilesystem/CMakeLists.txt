@@ -5,7 +5,7 @@ PROJECT("luafilesystem")
 INCLUDE(ExternalProject)
 
 SET(VERSION_EXTERNAL "1.6.3")
-SET(VERSION_PACKAGE  "3")
+SET(VERSION_PACKAGE  "4")
 SET(PROJECT_VERSION  "${VERSION_EXTERNAL}.${VERSION_PACKAGE}")
 
 # Get the VCS version for the jonchki configuration.
