@@ -12,22 +12,9 @@ SET(PROJECT_VERSION  "${VERSION_EXTERNAL}.${VERSION_PACKAGE}")
 INCLUDE(${CMAKE_HOME_DIRECTORY}/cmake/version.cmake)
 
 # Filter the jonchki configuration.
-IF(${BUILDCFG_LUA_VERSION} STREQUAL "5.1")
-	CONFIGURE_FILE(installer/lua5.1/luafilesystem.xml
-	               ${CMAKE_CURRENT_BINARY_DIR}/lua5.1-luafilesystem-${PROJECT_VERSION}.xml
-	               @ONLY)
-ELSEIF(${BUILDCFG_LUA_VERSION} STREQUAL "5.2")
-	CONFIGURE_FILE(installer/lua5.2/luafilesystem.xml
-	               ${CMAKE_CURRENT_BINARY_DIR}/lua5.2-luafilesystem-${PROJECT_VERSION}.xml
-	               @ONLY)
-ELSEIF(${BUILDCFG_LUA_VERSION} STREQUAL "5.3")
-	CONFIGURE_FILE(installer/lua5.3/luafilesystem.xml
-	               ${CMAKE_CURRENT_BINARY_DIR}/lua5.3-luafilesystem-${PROJECT_VERSION}.xml
-	               @ONLY)
-ELSE(${BUILDCFG_LUA_VERSION} STREQUAL "5.1")
-	# Stop here!
-	MESSAGE(FATAL_ERROR "The value '${BUILDCFG_LUA_VERSION}' for BUILDCFG_LUA_VERSION is invalid!")
-ENDIF(${BUILDCFG_LUA_VERSION} STREQUAL "5.1")
+CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/luafilesystem.xml
+               ${CMAKE_CURRENT_BINARY_DIR}/lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}.xml
+               @ONLY)
 
 
 #----------------------------------------------------------------------------
@@ -39,17 +26,18 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	# Select the LUA version.
 	INCLUDE(${CMAKE_HOME_DIRECTORY}/cmake/muhkuh_lua.cmake)
 
-	SET(LFS_CMAKE_ARGS "")
-	LIST(APPEND LFS_CMAKE_ARGS "-DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
-	LIST(APPEND LFS_CMAKE_ARGS "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}")
-	LIST(APPEND LFS_CMAKE_ARGS "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}")
-	LIST(APPEND LFS_CMAKE_ARGS "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
+	SET(SUB_CMAKE_ARGS "")
+	LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
+	LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}")
+	LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}")
+	LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
 	IF(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-		LIST(APPEND MHASH_CMAKE_ARGS "-DCMAKE_RC_COMPILER=${CMAKE_RC_COMPILER}")
+		LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_RC_COMPILER=${CMAKE_RC_COMPILER}")
 	ENDIF(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	LIST(APPEND LFS_CMAKE_ARGS "-DLUA_LIBRARIES=${LUA_LIBRARIES}")
-	LIST(APPEND LFS_CMAKE_ARGS "-DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR}")
-	LIST(APPEND LFS_CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=''")
+	LIST(APPEND SUB_CMAKE_ARGS "-DLUA_LIBRARIES=${LUA_LIBRARIES}")
+	LIST(APPEND SUB_CMAKE_ARGS "-DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR}")
+	LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=''")
+	LIST(APPEND SUB_CMAKE_ARGS "-DTEST_SCRIPT_FOLDER=${CMAKE_HOME_DIRECTORY}/cmake/tests")
 
 
 	ExternalProject_Add(TARGET_luafilesystem
@@ -57,11 +45,80 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	                    URL ${CMAKE_CURRENT_SOURCE_DIR}/luafilesystem-v_1_6_3.tar.gz
 	                    URL_HASH SHA1=72bc1415e7eefb339742538505675c59bd69e6bb
 	                    PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/templates ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem-${VERSION_EXTERNAL}/src/TARGET_luafilesystem
-	                    CMAKE_ARGS ${LFS_CMAKE_ARGS}
+	                    CMAKE_ARGS ${SUB_CMAKE_ARGS}
 	                    TEST_COMMAND make test
 	                    INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/install
 	)
 
-	# Write a version file.
-	FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/install/com.github.keplerproject-luafilesystem.version "SET(com.github.keplerproject-luafilesystem_VERSION ${VERSION_EXTERNAL}.${VERSION_PACKAGE})")
+	#----------------------------------------------------------------------------
+	#
+	# Build a package for the selected platform.
+	#
+
+	SET(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/targets/jonchki/repository/com/github/keplerproject/luafilesystem/${PROJECT_VERSION})
+	SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
+	SET(CPACK_PACKAGE_FILE_NAME "lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}-${JONCHKI_PLATFORM}")
+
+	SET(CPACK_GENERATOR "TXZ")
+	INCLUDE(CPack)
+
+	# This is the folder where the external project TARGET_luafilesystem installed the files.
+	SET(SUB_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/install/lib")
+
+	IF(JONCHKI_PLATFORM_DIST_ID STREQUAL "windows")
+		# Package a windows build.
+
+		# Install the DLL without execute permissions.
+		INSTALL(FILES ${SUB_INSTALL_DIR}/lfs.dll
+		        DESTINATION .)
+
+		CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/install_windows.lua
+		               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
+		               @ONLY)
+
+		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
+		        DESTINATION .)
+	ELSE(JONCHKI_PLATFORM_DIST_ID STREQUAL "windows")
+		# Package a linux build.
+
+		INSTALL(FILES ${SUB_INSTALL_DIR}/lfs.so
+		        DESTINATION .)
+
+		CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/install_linux.lua
+		               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
+		               @ONLY)
+
+		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
+		        DESTINATION .)
+	ENDIF(JONCHKI_PLATFORM_DIST_ID STREQUAL "windows")
+
+	CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/luafilesystem.xml
+	               ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
+	               @ONLY)
+
+
+	#-----------------------------------------------------------------------------
+	#
+	# Create a custom target named "pack".
+	# It builds the package and creates the hashes.
+	#
+	ADD_CUSTOM_TARGET(pack
+	                  COMMAND ${CMAKE_MAKE_PROGRAM}
+	                  COMMAND ${CMAKE_MAKE_PROGRAM} package
+	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
+	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.tar.xz
+	                  COMMENT "Pack the artifact and generate the hashes...")
+
+
+	#-----------------------------------------------------------------------------
+	#
+	# Filter the pom.xml file.
+	#
+	SET(POM_ARTIFACT_ID  "bitop")
+	SET(POM_GROUP_ID     "org.luajit")
+	SET(POM_VERSION      "${PROJECT_VERSION}")
+	SET(POM_PACKAGING    "tar.xz")
+	CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/pom.xml
+	               ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.pom
+	               @ONLY)
 ENDIF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
