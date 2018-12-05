@@ -57,6 +57,12 @@ elif [ "$TARGET" == "windows64" ]; then
 	JONCHKI_SYSTEM="--distribution-id windows --empty-distribution-version --cpu-architecture x86_64"
 	TOOLS_PATH=/usr/mingw-w64-x86_64/bin:${PATH}
 
+elif [ "$TARGET" == "raspberry" ]; then
+	CMAKE_COMPILER="-DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++"
+	CMAKE_PLATFORM="-DJONCHKI_PLATFORM_DIST_ID=ubuntu -DJONCHKI_PLATFORM_DIST_VERSION=18.04 -DJONCHKI_PLATFORM_CPU_ARCH=arm64"
+	JONCHKI_SYSTEM="--distribution-id ubuntu --distribution-version 18.04 --cpu-architecture arm64"
+	TOOLS_PATH=${PATH}
+
 else
 	echo "Unknown build target: ${TARGET}"
 	exit -1
