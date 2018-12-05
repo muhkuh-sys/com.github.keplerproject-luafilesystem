@@ -4,8 +4,8 @@ PROJECT("luafilesystem")
 
 INCLUDE(ExternalProject)
 
-SET(VERSION_EXTERNAL "1.6.3")
-SET(VERSION_PACKAGE  "4")
+SET(VERSION_EXTERNAL "1.7.0.2")
+SET(VERSION_PACKAGE  "1")
 SET(PROJECT_VERSION  "${VERSION_EXTERNAL}.${VERSION_PACKAGE}")
 
 # Get the VCS version for the jonchki configuration.
@@ -42,9 +42,9 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 
 	ExternalProject_Add(TARGET_luafilesystem
 	                    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem-${VERSION_EXTERNAL}
-	                    URL ${CMAKE_CURRENT_SOURCE_DIR}/luafilesystem-v_1_6_3.tar.gz
-	                    URL_HASH SHA1=72bc1415e7eefb339742538505675c59bd69e6bb
-	                    PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/templates ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem-${VERSION_EXTERNAL}/src/TARGET_luafilesystem
+	                    URL ${CMAKE_CURRENT_SOURCE_DIR}/luafilesystem-1_7_0_2.tar.gz
+	                    URL_HASH SHA1=910de0959ff72703b284c26783979b663c4dc0d2
+	                    PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/copy_over ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem-${VERSION_EXTERNAL}/src/TARGET_luafilesystem
 	                    CMAKE_ARGS ${SUB_CMAKE_ARGS}
 	                    TEST_COMMAND make test
 	                    INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/install
