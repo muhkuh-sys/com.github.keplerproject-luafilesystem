@@ -55,7 +55,7 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	# Build a package for the selected platform.
 	#
 
-	SET(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/targets/jonchki/repository/com/github/keplerproject/luafilesystem/${PROJECT_VERSION})
+	SET(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_BINARY_DIR}/../../repository/com/github/keplerproject/luafilesystem/${PROJECT_VERSION})
 	SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
 	SET(CPACK_PACKAGE_FILE_NAME "lua${BUILDCFG_LUA_VERSION}-luafilesystem-${PROJECT_VERSION}-${JONCHKI_PLATFORM}")
 

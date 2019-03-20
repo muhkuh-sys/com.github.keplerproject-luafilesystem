@@ -1,7 +1,7 @@
 import groovy.json.JsonSlurperClassic
 
 node {
-    def ARTIFACTS_PATH = 'build/*/lua5.*/luafilesystem/targets/jonchki/repository/com/github/keplerproject/luafilesystem/**'
+    def ARTIFACTS_PATH = 'build/repository/com/github/keplerproject/luafilesystem/*'
     def strBuilds = env.JENKINS_SELECT_BUILDS
     def atBuilds = new JsonSlurperClassic().parseText(strBuilds)
 
