@@ -114,8 +114,8 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	#
 	# Filter the pom.xml file.
 	#
-	SET(POM_ARTIFACT_ID  "bitop")
-	SET(POM_GROUP_ID     "org.luajit")
+	SET(POM_ARTIFACT_ID  "lua${BUILDCFG_LUA_VERSION}-luafilesystem")
+	SET(POM_GROUP_ID     "com.github.keplerproject")
 	SET(POM_VERSION      "${PROJECT_VERSION}")
 	SET(POM_PACKAGING    "tar.xz")
 	CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/pom.xml
