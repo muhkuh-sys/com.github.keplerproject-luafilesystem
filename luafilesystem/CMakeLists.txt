@@ -41,10 +41,10 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 
 
 	ExternalProject_Add(TARGET_luafilesystem
-	                    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem-${VERSION_EXTERNAL}
+	                    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem
 	                    URL ${CMAKE_CURRENT_SOURCE_DIR}/luafilesystem-1_7_0_2.tar.gz
 	                    URL_HASH SHA1=910de0959ff72703b284c26783979b663c4dc0d2
-	                    PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/copy_over ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem-${VERSION_EXTERNAL}/src/TARGET_luafilesystem
+	                    PATCH_COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/apply_patches.py --working-folder ${CMAKE_CURRENT_BINARY_DIR}/luafilesystem/src/TARGET_luafilesystem --patch-folder ${CMAKE_CURRENT_SOURCE_DIR}/patches --strip 1 --copy-folder ${CMAKE_CURRENT_SOURCE_DIR}/copy_over
 	                    CMAKE_ARGS ${SUB_CMAKE_ARGS}
 	                    TEST_COMMAND make test
 	                    INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/install

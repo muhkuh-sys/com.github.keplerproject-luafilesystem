@@ -2,7 +2,7 @@
 <jonchki-artifact version="1.0">
 	<info group="com.github.keplerproject"
 	      module="luafilesystem"
-	      artifact="lua5.2-luafilesystem"
+	      artifact="lua5.4-luafilesystem"
 	      version="@PROJECT_VERSION@"
 	      vcs-id="@PROJECT_VERSION_VCS@"
 	      extension="tar.xz"
@@ -15,7 +15,7 @@
 		</description>
 	</info>
 	<dependencies>
-		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.2"/>
+		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.4"/>
 		<dependency group="org.lua" module="lua" artifact="lua"/>
 	</dependencies>
 </jonchki-artifact>

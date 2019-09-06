@@ -3,7 +3,7 @@ set -e
 
 TARGET=$1
 
-JONCHKI_VERSION=0.0.3.1
+JONCHKI_VERSION=0.0.4.1
 JONCHKI_VERBOSE=info
 
 # Get the path to this script. Found here: https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
@@ -71,8 +71,7 @@ fi
 BUILD_DIR=${PRJ_DIR}/build/${TARGET}
 mkdir -p ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}/lua5.1/build_requirements
-mkdir -p ${BUILD_DIR}/lua5.2/build_requirements
-mkdir -p ${BUILD_DIR}/lua5.3/build_requirements
+mkdir -p ${BUILD_DIR}/lua5.4/build_requirements
 
 
 # Install jonchki.
@@ -100,29 +99,15 @@ PATH=${TOOLS_PATH} make pack
 popd
 
 
-pushd ${BUILD_DIR}/lua5.2/build_requirements
-rm -f luafilesystem/lua5.2-luafilesystem-*.xml
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_ONLY_JONCHKI_CFG="ON" -DBUILDCFG_LUA_VERSION="5.2" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
+pushd ${BUILD_DIR}/lua5.4/build_requirements
+rm -f luafilesystem/lua5.4-luafilesystem-*.xml
+PATH=${TOOLS_PATH} cmake -DBUILDCFG_ONLY_JONCHKI_CFG="ON" -DBUILDCFG_LUA_VERSION="5.4" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
 PATH=${TOOLS_PATH} make
-${JONCHKI} install-dependencies --verbose debug --syscfg ${PRJ_DIR}/jonchki/jonchkisys.cfg --prjcfg ${PRJ_DIR}/jonchki/jonchkicfg.xml ${JONCHKI_SYSTEM} --build-dependencies luafilesystem/lua5.2-luafilesystem-*.xml
+${JONCHKI} install-dependencies --verbose debug --syscfg ${PRJ_DIR}/jonchki/jonchkisys.cfg --prjcfg ${PRJ_DIR}/jonchki/jonchkicfg.xml ${JONCHKI_SYSTEM} --build-dependencies luafilesystem/lua5.4-luafilesystem-*.xml
 popd
 
-# Build the LUA5.2 version.
-pushd ${BUILD_DIR}/lua5.2
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_LUA_USE_SYSTEM="OFF" -DBUILDCFG_LUA_VERSION="5.2" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
-PATH=${TOOLS_PATH} make pack
-popd
-
-
-pushd ${BUILD_DIR}/lua5.3/build_requirements
-rm -f luafilesystem/lua5.3-luafilesystem-*.xml
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_ONLY_JONCHKI_CFG="ON" -DBUILDCFG_LUA_VERSION="5.3" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
-PATH=${TOOLS_PATH} make
-${JONCHKI} install-dependencies --verbose debug --syscfg ${PRJ_DIR}/jonchki/jonchkisys.cfg --prjcfg ${PRJ_DIR}/jonchki/jonchkicfg.xml ${JONCHKI_SYSTEM} --build-dependencies luafilesystem/lua5.3-luafilesystem-*.xml
-popd
-
-# Build the LUA5.3 version.
-pushd ${BUILD_DIR}/lua5.3
-PATH=${TOOLS_PATH} cmake -DBUILDCFG_LUA_USE_SYSTEM="OFF" -DBUILDCFG_LUA_VERSION="5.3" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
+# Build the LUA5.4 version.
+pushd ${BUILD_DIR}/lua5.4
+PATH=${TOOLS_PATH} cmake -DBUILDCFG_LUA_USE_SYSTEM="OFF" -DBUILDCFG_LUA_VERSION="5.4" -DCMAKE_INSTALL_PREFIX="" ${CMAKE_CROSS_COMPILER} ${CMAKE_PLATFORM} ${PRJ_DIR}
 PATH=${TOOLS_PATH} make pack
 popd
