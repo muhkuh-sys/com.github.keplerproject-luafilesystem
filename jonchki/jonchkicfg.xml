@@ -7,15 +7,6 @@
 			<artifact>[group]/[module]/[version]/[artifact]-[version][platform].[extension]</artifact>
 		</repository>
 
-		<!-- The bintray repository contains stable artifacts. -->
-<!--
-		<repository id="bintray" type="url" cacheable="true" rescan="1800">
-			<root>https://dl.bintray.com/muhkuh/jonchki</root>
-			<versions>[group]/[module]</versions>
-			<config>[group]/[module]/[version]/[artifact]-[version][platform].[extension]</config>
-			<artifact>[group]/[module]/[version]/[artifact]-[version][platform].[extension]</artifact>
-		</repository>
--->
 		<!-- The github repository contains stable artifacts. -->
 		<repository id="github" type="url" cacheable="true" rescan="1800">
 			<root>https://github.com/muhkuh-sys</root>
